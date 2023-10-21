@@ -20,7 +20,7 @@ export const usuario = {
     },
 
     get edad() {
-        return this._nombre;
+        return this._edad;
     },
 
     set edad(nuevoEdad) {
@@ -36,7 +36,7 @@ export const usuario = {
     },
 
     mostrarInfo(){
-        alert(`Bienvenido, ${this.nombre}, su edad es ${this.edad} y su dni es ${this.dni}`);
+        alert(`Bienvenido, ${this._nombre}, su edad es ${this._edad} y su dni es ${this._dni}`);
     },
 
     validarDni() {
