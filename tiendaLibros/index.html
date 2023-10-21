@@ -17,21 +17,23 @@
       <div class="container">
         <div class="row">
           <div class="col-md-5">
-            <h2>Agregar o Eliminar Libros</h2>
+            <h2>Agregar libro a la Libreria</h2>
             <form action="" class="tiendaLibros">
               <div class="mb-3">
                 <label for="titulo" class="form-label">Titulo</label>
-                <input type="text" class="form-control" id="titulo">
+                <input type="text" class="form-control" id="titulo" required>
               </div>
               <div class="mb-3">
                 <label for="autor" class="form-label">Autor</label>
-                <input type="text" class="form-control" id="autor">
+                <input type="text" class="form-control" id="autor" required>
               </div>
               <div class="mb-3">
                 <label for="precio" class="form-label">Precio</label>
-                <input type="number" class="form-control" id="precio">
+                <input type="number" class="form-control" id="precio" required>
               </div>
-              <button class="btn btn-secondary mb-5" id="agregar">Agregar</button>
+              <button class="btn btn-secondary" id="agregar">Agregar</button>
+              <label for="" style="display: none;">Agregando...</label>
+              <progress id="progress" value="0" max="100" style="display: none;"></progress>
             </form>
           </div>
           <div class="col-md-6">
@@ -40,11 +42,20 @@
             <button class="btn btn-secondary mt-3" id="cargarCesta">Cargar Cesta</button>
           </div>
         </div>
+      </div>
+      <div class="container">
+        <h2>Añadir libro a la Cesta</h2>
         <div>
           <select name="Eliminar" id="eliminarLibro">
             <option value="0">Seleccione un Libro</option>
           </select>
-          <button class="btn btn-secondary mb-5" id="eliminar">Eliminar</button>
+          <button class="btn btn-secondary mb-5" id="eliminar">Eliminar</button>  
+        </div>
+        <div>
+          <select name="Eliminar" id="eliminarLibro">
+            <option value="0">Seleccione un Libro</option>
+          </select>
+          <button class="btn btn-secondary mb-5" id="eliminar">Agregar</button>
         </div>
       </div>
   </body>
