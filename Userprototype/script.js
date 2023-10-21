@@ -34,6 +34,8 @@ function handlerInsertUsuario(e) {
   const mensajeExito = document.getElementById("mensajeExito");
   const mensajeError = document.getElementById("mensajeEError");
 
+  const saludar = "holaaaa";
+
 
   //Creamos un objeto basado en el prototipo de usuario
   let newUser = Object.create(Usuario);
