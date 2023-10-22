@@ -64,7 +64,18 @@ function handlerAgregarLibro(e){
     }
 
     //Agregamos el libro a la libreria.
+   
+    const progress = document.getElementById("progress");
 
+      // Simulamos el progreso durante 3 segundos
+      progress.style.display = "block";
+      setTimeout(function () {
+        progress.style.width = "100%";
+        // Ocultar el progreso después de completarse
+        setTimeout(function () {
+          progress.style.display = "none";
+        }, 1000); // Esperar 1 segundo antes de ocultar
+      }, 3000); // Rellenar durante 3 segundos
 
     tpmArray.push(newLibro);
     insertLibroStructure(keyLibreria, tpmArray);
