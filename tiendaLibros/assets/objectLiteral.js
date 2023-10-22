@@ -4,40 +4,43 @@
  */
 
 export const libro = {
+  _titulo: "",
+  _autor: "",
+  _precio: 0,
 
-    _titulo: "",
-    _autor: "",
-    _precio: 0,
+  get titulo() {
+    return this._titulo;
+  },
 
-    get titulo() {
-        return this._titulo;
-    },
+  set titulo(nuevoTitulo) {
+    this._titulo = nuevoTitulo;
+  },
 
-    set titulo(nuevoTitulo) {
-        this._titulo  = nuevoTitulo;
-    },
+  get autor() {
+    return this._autor;
+  },
 
-    get autor() {
-        return this._autor;
-    },
+  set autor(nuevoAutor) {
+    this._autor = nuevoAutor;
+  },
 
-    set autor(nuevoAutor) {
-        this._autor  = nuevoAutor;
-    },
+  get precio() {
+    return this._precio;
+  },
 
-    get precio() {
-        return this._precio;
-    },
+  set precio(nuevoPrecio) {
+    this._precio = nuevoPrecio;
+  },
 
-    set precio(nuevoPrecio) {
-        this._precio  = nuevoPrecio;
-    },
+  mostrarLibroAgregado() {
+    alert(
+      `El Libro ${this._titulo} del autor ${this._autor} ha sido insertado correctamente`
+    );
+  },
 
-    mostrarLibroAgregado(){
-        alert(`El Libro ${this._titulo} del autor ${this._autor} ha sido insertado correctamente`);
-    },
-
-    mostrarLibroEliminado(){
-        alert(`El Libro ${this._titulo} del autor ${this._autor} ha sido eliminado correctamente`);
-    },
-}
+  mostrarLibroEliminado() {
+    alert(
+      `El Libro ${this._titulo} del autor ${this._autor} ha sido eliminado correctamente`
+    );
+  },
+};

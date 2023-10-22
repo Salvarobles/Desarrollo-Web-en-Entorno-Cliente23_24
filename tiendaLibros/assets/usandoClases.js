@@ -3,42 +3,45 @@
  * @author Salvador Robles Gómez.
  */
 export class LibroClass {
-    constructor(titulo = "", autor = "", precio = 0){
-        this._titulo = titulo;
-        this._autor = autor;
-        this._precio = precio;
-    }
+  constructor(titulo = "", autor = "", precio = 0) {
+    this._titulo = titulo;
+    this._autor = autor;
+    this._precio = precio;
+  }
 
-    get titulo() { 
-        return this._titulo;
-    }
-    
-    set titulo(nuevoTitulo) {
-        this._titulo = nuevoTitulo;
-    }
+  get titulo() {
+    return this._titulo;
+  }
 
-    get autor() {
-        return this._autor;
-    }
+  set titulo(nuevoTitulo) {
+    this._titulo = nuevoTitulo;
+  }
 
-    set autor(nuevoAutor) {
-        this._autor = nuevoAutor;
-    }
+  get autor() {
+    return this._autor;
+  }
 
-    get precio() {
-        return this._precio;
-    }
+  set autor(nuevoAutor) {
+    this._autor = nuevoAutor;
+  }
 
-    set precio(nuevoPrecio) {
-        this._precio = nuevoPrecio;
-    }
+  get precio() {
+    return this._precio;
+  }
 
-    mostrarLibroAgregado(){
-        alert(`El Libro ${this._titulo} del autor ${this._autor} ha sido insertado correctamente`);
-    }
+  set precio(nuevoPrecio) {
+    this._precio = nuevoPrecio;
+  }
 
-    mostrarLibroEliminado(){
-        alert(`El Libro ${this._titulo} del autor ${this._autor} ha sido eliminado correctamente`);
-    }
+  mostrarLibroAgregado() {
+    alert(
+      `El Libro ${this._titulo} del autor ${this._autor} ha sido insertado correctamente`
+    );
+  }
 
+  mostrarLibroEliminado() {
+    alert(
+      `El Libro ${this._titulo} del autor ${this._autor} ha sido eliminado correctamente`
+    );
+  }
 }
