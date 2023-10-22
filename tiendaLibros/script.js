@@ -171,9 +171,19 @@ function cargarLibrosTextarea() {
   tmpArray.sort();
 
   let textArea = document.getElementById("cestaLibros");
+  //si ya existe ese libro en el textarea, no lo agregamos
+  for (const libro of tmpArray) {
+    if (!textArea.value.includes(libro._titulo)) {
+      textArea.value += `\n El libro añadido: ${libro._titulo} de ${libro._autor} por ${libro._precio}€`;
+    }
+  }
 
   textArea.value += tmpArray.map((objeto) => {
-    return `\n El libro añadido: ${objeto._titulo} de ${objeto._autor} por ${objeto._precio}€`;
+    !textArea.value.includes(
+      `El libro añadido: ${objeto._titulo} de ${objeto._autor} por ${objeto._precio}€`
+    ) || ","
+      ? `\n El libro añadido: ${objeto._titulo} de ${objeto._autor} por ${objeto._precio}€`
+      : false;
   });
 }
 
