@@ -131,21 +131,8 @@ function handlerAgregarLibro(e) {
   return true;
 }
 
-// function cargarLibreriaSelect() {
-//   const select = document.getElementById("selectLibro");
-
-//   const tmpArray = loadLibroStructure(keyLibreria);
-//   tmpArray.sort();
-
-//   for (libros of tmpArray) {
-//     const option = document.createElement("opcion");
-//     option.value = tmpArray.indexOf(libros);
-//     select.add(option);
-//   }
-
-// }
 /**
- * Añadimos los libros de la libreria al select y comprobamos que no se inserte libros repetidos.
+ * @description Añadimos los libros de la libreria al select y comprobamos que no se inserte libros repetidos.
  */
 function añadirSelect() {
   const array = loadLibroStructure(keyLibreria);
@@ -164,7 +151,7 @@ function añadirSelect() {
 }
 
 /**
- * Cargar los libros de la cesta al textarea.
+ * @description Cargar los libros de la cesta al textarea.
  */
 function cargarLibrosTextarea() {
   const tmpArray = loadLibroStructure(keyCesta);
@@ -187,6 +174,9 @@ function cargarLibrosTextarea() {
   });
 }
 
+/**
+ * @description Añadimos el libro seleccionado al textarea.
+ */
 function añadirLibrosTextarea() {
   const select = document.getElementById("selectLibro");
 
@@ -204,6 +194,9 @@ function añadirLibrosTextarea() {
   }
 }
 
+/**
+ * @description Eliminamos el libro seleccionado del textarea.
+ */
 function eliminarLibrosTextarea() {
   const textArea = document.getElementById("cestaLibros");
   const select = document.getElementById("selectLibro");
@@ -220,6 +213,9 @@ function eliminarLibrosTextarea() {
   }
 }
 
+/**
+ * @description Calculamos el precio total de la cesta.
+ */
 function calcularPrecio() {
   const precio = document.getElementById("precioTotal");
 
@@ -250,6 +246,7 @@ function calcularPrecio() {
   const total = numero.reduce((a, b) => a + b, 0);
   precioTotal.value = total;
 }
+
 
 function init() {
   document
@@ -282,5 +279,4 @@ function init() {
 }
 
 //------------------INICIALIZACION------------------
-
 document.addEventListener("DOMContentLoaded", init);
