@@ -14,12 +14,17 @@ const obj1 = {
 
 const obj2 = {
     a : 4,
-    d : 5,
+    d : 1,
     c : 6,
     d : 4,
     e : 5,
 }
-
+/**
+ * Funcion que fusiona dos objetos y lo devuelve uno solo. 
+ * @param {object} obj1 
+ * @param {object} obj2 
+ * @returns Devuelve un objeto.
+ */
 function fusionar(obj1, obj2){
  
     const obj3 = {};
