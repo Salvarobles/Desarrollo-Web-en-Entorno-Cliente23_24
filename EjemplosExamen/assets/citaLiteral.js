@@ -1,4 +1,4 @@
-export const cita = {
+const cita = {
   tiempo: Date(),
 
   _fecha: "",
@@ -11,13 +11,21 @@ export const cita = {
   get hora() {
     return this.tiempo.getHours();
   },
-
 };
 
-const citaMedica = Object.create(cita);
+export const citaMedica = Object.create(cita);
 
 Object.assign(citaMedica, {
+  _dni: "",
   _paciente: "",
+
+  get dni() {
+    return this._dni;
+  },
+
+  set dni(value) {
+    this._dni = value;
+  },
 
   get paciente() {
     return this._paciente;
@@ -27,14 +35,20 @@ Object.assign(citaMedica, {
     this._paciente = value;
   },
 
-  obtenerInfoCita() {
-    return alert(
-      `El ${this._paciente} tiene cita a las ${this._hora} del ${this.fecha}`
-    );
+  crearCita(dni, paciente, fecha, hora) {
+    this._dni = dni ;
+    this._paciente = paciente;
+    this._fecha = fecha;
+    this._hora = hora;
   },
 
+  obtenerInfoCita() {
+    const myMap = new Map();
+    myMap.set(this._dni, {
+      paciente: this._paciente,
+      fecha: this._fecha,
+      hora: this._hora,
+    });
+    return myMap;
+  },
 });
-
-
-
-
