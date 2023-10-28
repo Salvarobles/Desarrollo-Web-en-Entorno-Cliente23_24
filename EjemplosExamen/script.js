@@ -21,6 +21,8 @@ function insertCitasStruct(key, structure) {
 function loadStruct(key) {
   JSON.parse(localStorage.getItem(key));
 }
+
+
 //------------------- INICIALIZATION ----------------
 
 insertCitasStruct(KEY, arrayCita);
