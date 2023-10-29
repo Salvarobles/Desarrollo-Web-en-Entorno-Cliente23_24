@@ -1,42 +1,31 @@
+/**
+ * Clase Literal padre.
+ */
 const cita = {
-  tiempo: Date(),
 
   _fecha: "",
   _hora: "",
 
   get fecha() {
-    return this.tiempo.getDate();
+    return this._fecha;
   },
 
   get hora() {
-    return this.tiempo.getHours();
+    return this._hora;
   },
 };
 
+/**
+ * Clase hija y la exportamos.
+ */
 export const citaMedica = Object.create(cita);
 
 Object.assign(citaMedica, {
   _dni: "",
   _paciente: "",
 
-  get dni() {
-    return this._dni;
-  },
-
-  set dni(value) {
-    this._dni = value;
-  },
-
-  get paciente() {
-    return this._paciente;
-  },
-
-  set paciente(value) {
-    this._paciente = value;
-  },
-
   crearCita(dni, paciente, fecha, hora) {
-    this._dni = dni ;
+    this._dni = dni;
     this._paciente = paciente;
     this._fecha = fecha;
     this._hora = hora;
@@ -52,3 +41,24 @@ Object.assign(citaMedica, {
     return myMap;
   },
 });
+
+Object.defineProperty(citaMedica, "dni", {
+  get dni() {
+    return this._dni;
+  },
+
+  set dni(value) {
+    this._dni = value;
+  },
+});
+
+Object.defineProperty(citaMedica, "paciente", {
+  get paciente() {
+    return this._paciente;
+  },
+
+  set paciente(value) {
+    this._paciente = value;
+  },
+});
+

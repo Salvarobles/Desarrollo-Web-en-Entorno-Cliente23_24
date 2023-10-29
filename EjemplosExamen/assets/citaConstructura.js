@@ -1,4 +1,4 @@
-export function Cita() {
+function Cita() {
     const tiempo = Date.now();
     this._fecha = tiempo.getDate();
     this._hora = tiempo.getHours();
@@ -16,7 +16,7 @@ export function Cita() {
     });
 }
 
-function CitaMedica(paciente, edad, fecha, hora) {
+export function CitaMedica(paciente, edad, fecha, hora) {
     CitaMedica.call(this, fecha, hora);
     this._paciente = paciente;
     this._edad = edad;
