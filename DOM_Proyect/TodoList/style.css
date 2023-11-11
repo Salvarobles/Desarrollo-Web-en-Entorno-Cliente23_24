@@ -157,6 +157,7 @@ img {
   padding: 10px;
   display: flex;
   align-items: center;
+  color: red;
 }
 
 .tasks-list-ul li span {
