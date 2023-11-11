@@ -13,6 +13,7 @@ const cita = {
   get hora() {
     return this._hora;
   },
+
 };
 
 /**
@@ -61,4 +62,3 @@ Object.defineProperty(citaMedica, "paciente", {
     this._paciente = value;
   },
 });
-

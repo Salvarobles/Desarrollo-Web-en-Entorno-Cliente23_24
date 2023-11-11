@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Todo List</title>
+    <link rel="stylesheet" href="style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+      integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+  </head>
+  <body>
+    <nav>
+      <div class="search-container">
+        <i class="fa fa-search search-icon"></i>
+        <input type="text" class="search-input" placeholder="Buscar Tarea..." />
+      </div>
+      <ul>
+        <li>
+          <a href="#" class="mostrar-grafico-link">Mostrar Gráfico</a>
+        </li>
+      </ul>
+    </nav>
+    <main>
+      <section class="task-list-section">
+        <!-- Titulo para la tarea -->
+        <div class="img-titulo">
+          <img
+            src="https://cdn.icon-icons.com/icons2/1526/PNG/512/checklist_106575.png"
+            alt="Lista de tareas"
+            class="img-lista"
+          />
+          <h1>Lista de Tareas</h1>
+        </div>
+        <!-- Input para la tarea -->
+        <div class="form-container">
+          <input
+            type="text"
+            id="new-task-input"
+            placeholder="Añadir un añadir tarea nueva"
+          />
+          <!-- Botón añadir tarea -->
+          <button class="add-task-btn">Añadir Tarea</button>
+        </div>
+
+        <ul class="tasks-list-ul"></ul>
+
+        <section class="grafico-container"></section>
+      </section>
+    </main>
+
+    <!-- Script Utilizados -->
+    <script type="module" src="/main.js"></script>
+  </body>
+</html>

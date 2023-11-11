@@ -15,6 +15,8 @@ function Cita() {
         },
     });
 }
+CitaMedica.prototype = Object.create(Cita.prototype);
+CitaMedica.prototype.constructor = CitaMedica;
 
 export function CitaMedica(paciente, edad, fecha, hora) {
     CitaMedica.call(this, fecha, hora);
@@ -45,6 +47,3 @@ export function CitaMedica(paciente, edad, fecha, hora) {
 CitaMedica.prototype.obtenerInfoCita = function () {
     alert(`El ${this._paciente} tiene cita a las ${this._hora} del ${this.fecha}`);
 };
-
-CitaMedica.prototype = Object.create(Cita.prototype);
-CitaMedica.prototype.constructor = CitaMedica;
