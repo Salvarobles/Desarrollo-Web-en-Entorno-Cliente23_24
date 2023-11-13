@@ -1,13 +1,15 @@
 //---------------- IMPORT --------------------
 
-import { v4 as uuidv4 } from "uuid";
+import { stringify, v4 as uuidv4 } from "uuid";
 import autoAnimate from "@formkit/auto-animate";
+import crearGrafico from "./componets/grafico";
 
 //----------------- Capturar los elementos del DOM --------------------------------
 
 const newTaskInput = document.querySelector("#new-task-input");
 const taskListUl = document.querySelector(".tasks-list-ul");
 const addTaskBtn = document.querySelector(".add-task-btn");
+const showGraphicsBtn = document.querySelector(".mostrar-grafico-link");
 
 //---------------- animacion --------------------------------
 autoAnimate(taskListUl, {
@@ -52,11 +54,18 @@ function addTaskToList(task, taskListUl) {
 
 function addTask() {
   const newTaskTitle = app.newTaskInput.value;
-  if (newTaskTitle) {
+
+  //const isDuplacate
+  const isDuplacate = app.tasks.some((task) => task.title === newTaskTitle);
+
+  if (isDuplacate) {
+    alert("Igual");
+  } else {
     const newTask = createNewTask(newTaskTitle);
     app.tasks.push(newTask);
     addTaskToList(newTask, app.taskListUl);
     app.newTaskInput.value = "";
+    saveTaskToLocalStorage();
   }
 }
 
@@ -74,69 +83,116 @@ function createTaskElement(task) {
   const taskTitleElement = document.createElement("span");
   taskTitleElement.textContent = task.title;
   taskTitleElement.classList.toggle("completed", task.isCompleted);
+  taskTitleElement.style.width = "80%";
 
   const taskDeleteBtn = document.createElement("button");
   taskDeleteBtn.textContent = "Eliminar tarea";
   taskDeleteBtn.className = "delete-btn";
 
+  const taskPrintBtn = document.createElement("i");
+  taskPrintBtn.className = "fa-solid fa-print";
+
   //Crear los eventos de este li.
+  //Eliminar
   taskDeleteBtn.addEventListener("click", () => {
     //lo que quiero hacer cuando pulso el boton de eliminar
-    taskElementLi.remove();
+    const taskIndex = app.tasks.indexOf(task);
+    if (taskIndex !== - 1){
+      app.tasks.splice(taskIndex, 1);
+      taskElementLi.remove();
+    }
+    //Save localstorage
+    saveTaskToLocalStorage();
   });
 
   taskCheckBox.addEventListener("change", () => {
-
     // taskTitleElement.classList = taskCheckBox.checked
     // ? "tachado"
     // : (remove = "tachado");
 
-    taskCheckBox.checked ? (taskTitleElement.className = "tachado") : (taskTitleElement.classList.remove = "tachado");
+    task.isCompleted = taskCheckBox.checked;
+    const taskIndex = app.tasks.indexOf(task);
+    
+
+    if (taskIndex !== - 1){
+      app.tasks[taskIndex].isCompleted = task.isCompleted;
+      taskTitleElement.classList.toggle("completed", task.isCompleted);
+      
+    }
+
+    //Save LocalStorage
+
+    saveTaskToLocalStorage();
+
+    // taskCheckBox.checked
+    //   ? (taskTitleElement.className = "completed")
+    //   : (taskTitleElement.classList.toggle("completed"), task.isCompleted);
 
     // document.getElementsByClassName("tachado")
     //   ? (taskTitleElement.className = "tachado")
     //   : (taskTitleElement.classList.remove = "tachado");
   });
 
+  taskTitleElement.addEventListener("dblclick", () => {
+    const newTitle = prompt("Introduce un nuevo texto a la tarea:", task.title);
+
+    const isDuplacate = app.tasks.some((task) => task.title === newTitle);
+
+    if (isDuplacate) {
+      alert("Titulo duplicado");
+      return false;
+    }
+
+    if (newTitle !== null) {
+      task.title = newTitle;
+      taskTitleElement.textContent = newTitle;
+      saveTaskToLocalStorage();
+    }
+  });
 
   // Añados los elementos al li.
   taskElementLi.appendChild(taskCheckBox);
   taskElementLi.appendChild(taskTitleElement);
+  taskElementLi.appendChild(taskPrintBtn);
   taskElementLi.appendChild(taskDeleteBtn);
+  saveTaskToLocalStorage();
 
   return taskElementLi;
 }
 
 /**
- * Funcion para editar texto de la tarea.
- */
-
-// function editarTexto() {
-//   const elementoTexto = document.querySelector("#editable");
-//   const textoActual = ;
-
-//   const nuevoTexto = prompt("Edita el texto:", textoActual);
-
-//   if (nuevoTexto !== null) {
-//     elementoTexto.innerText = nuevoTexto;
-//   }
-// }
-
-/**
  * Funcion para buscar una tarea en el buscador.
- */
-
-/**
- * Funcion para el checkbox de la tarea, en su texto estará trachado.
  */
 
 //------------------- Eventos del formulario -------------------------
 addTaskBtn.addEventListener("click", addTask);
+newTaskInput.addEventListener("keydown", (event) => {
+  if (event.key === "Enter") {
+    addTask();
+  }
+});
+
+showGraphicsBtn.addEventListener("click", ()=>crearGrafico(app.tasks));
+
+
+//------------------- Local Storage ------------------------
+
+function saveTaskToLocalStorage(){
+  localStorage.setItem("TareasTodoList", JSON.stringify(app.tasks));
+}
+
+function loadTasksFromLocalStorage(){
+  const listTasks = localStorage.getItem("TareasTodoList");
+  if (listTasks) {
+    app.tasks = JSON.parse(listTasks);
+    app.tasks.forEach(task => addTaskToList(task, app.taskListUl));
+  }
+}
 
 //-------------------- Inicializacion -----------------------------
 function init() {
   //lo que quiero hacer cunado arranque...
-  //loadTasksFromLocalStorage()
+  loadTasksFromLocalStorage();
 }
 
 document.addEventListener("DOMContentLoaded", init);
