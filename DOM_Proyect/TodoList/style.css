@@ -193,3 +193,8 @@ img {
   width: 800px;
   height: 500px;
 }
+
+.tachado {
+  text-decoration: line-through;
+  color: #00ff37;
+}

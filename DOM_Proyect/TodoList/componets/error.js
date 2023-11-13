@@ -1,0 +1,5 @@
+
+
+function error (text, dom) {
+    
+}

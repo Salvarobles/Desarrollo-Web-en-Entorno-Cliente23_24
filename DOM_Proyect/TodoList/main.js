@@ -45,6 +45,8 @@ function createNewTask(title, isCompleted = false) {
  */
 function addTaskToList(task, taskListUl) {
   const taskElement = createTaskElement(task);
+  // taskElement.setAttribute("aondblclick", "editarTexto()");
+  // taskElement.setAttribute("id", "editable");
   taskListUl.appendChild(taskElement);
 }
 
@@ -80,9 +82,22 @@ function createTaskElement(task) {
   //Crear los eventos de este li.
   taskDeleteBtn.addEventListener("click", () => {
     //lo que quiero hacer cuando pulso el boton de eliminar
+    taskElementLi.remove();
   });
 
-  taskCheckBox.addEventListener("change", () => {});
+  taskCheckBox.addEventListener("change", () => {
+
+    // taskTitleElement.classList = taskCheckBox.checked
+    // ? "tachado"
+    // : (remove = "tachado");
+
+    taskCheckBox.checked ? (taskTitleElement.className = "tachado") : (taskTitleElement.classList.remove = "tachado");
+
+    // document.getElementsByClassName("tachado")
+    //   ? (taskTitleElement.className = "tachado")
+    //   : (taskTitleElement.classList.remove = "tachado");
+  });
+
 
   // Añados los elementos al li.
   taskElementLi.appendChild(taskCheckBox);
@@ -91,6 +106,29 @@ function createTaskElement(task) {
 
   return taskElementLi;
 }
+
+/**
+ * Funcion para editar texto de la tarea.
+ */
+
+// function editarTexto() {
+//   const elementoTexto = document.querySelector("#editable");
+//   const textoActual = ;
+
+//   const nuevoTexto = prompt("Edita el texto:", textoActual);
+
+//   if (nuevoTexto !== null) {
+//     elementoTexto.innerText = nuevoTexto;
+//   }
+// }
+
+/**
+ * Funcion para buscar una tarea en el buscador.
+ */
+
+/**
+ * Funcion para el checkbox de la tarea, en su texto estará trachado.
+ */
 
 //------------------- Eventos del formulario -------------------------
 addTaskBtn.addEventListener("click", addTask);
