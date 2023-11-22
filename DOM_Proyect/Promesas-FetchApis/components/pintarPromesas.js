@@ -1,8 +1,18 @@
 /**
  * @param {HTMLDivElement} elemnt
  */
-const pintarPromesas = (element) => {
+const pintarPromesas = (element, city) => {
+    // getUsersWithPromise()
+    // .then(users => element.innerHTML =  users.map(user => {
+    //     if (user.address.city == city){
+    //        `Este usuario pertanece a ${user.firstname}` 
+    //     }
+    // }))
+    // .catch(err => element.innerHTML = (err));
 
+    getUsersWithPromise()
+    .then(users => element.innerHTML =  users.map(user => user.address.city == city ? 0 :`<li>${user.firstname}</li>` ))
+    .catch(err => element.innerHTML = (err));
 };
 
 function getUsersWithPromise() {
