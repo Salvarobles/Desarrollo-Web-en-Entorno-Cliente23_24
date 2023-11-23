@@ -11,7 +11,7 @@ const pintarPromesas = (element, city) => {
     // .catch(err => element.innerHTML = (err));
 
     getUsersWithPromise()
-    .then(users => element.innerHTML =  users.map(user => user.address.city == city ? 0 :`<li>${user.firstname}</li>` ))
+    .then(users => element.innerHTML =  users.map(user => user.firstname == city ? 0 :`<li>${user.email}</li>` ))
     .catch(err => element.innerHTML = (err));
 };
 
@@ -32,7 +32,7 @@ function getUsersWithPromise() {
 
 function getWeatherWithPromise() {
   return new Promise((resolve, reject) => {
-    fetch("https://api.openweathermap.org/data/2.5/weather?lat={lat}&lon={lon}&appid={API key}")
+    fetch("https://api.openweathermap.org/data/2.5/weather?lat={lat}&lon={lon}&appid={APIkey}")
         .then(response => {
             if (response.ok){
                 return response.json();
