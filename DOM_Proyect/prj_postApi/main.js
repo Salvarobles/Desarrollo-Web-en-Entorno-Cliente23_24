@@ -1,6 +1,9 @@
 //------------- Imports ----------------------------
 
 import { renderPost } from "./src/components/renderPost/renderPost";
+import { createPostApi } from "./src/helper/createPostApi";
+import { deletePostApi } from "./src/helper/deletePostApi";
+import { getPostApi } from "./src/helper/getPostApi";
 const URL = `${import.meta.env.VITE_URL}/posts`;
 
 //------------- Varibles Grobales --------------------
@@ -14,44 +17,47 @@ const contentPost = document.querySelector("#content-post");
 //------------- Funciones ---------------------------
 
 function init() {
-  // Traer los post
-  // Metodo: POST
-  fetch(URL)
-    .then((response) => response.json())
-    .then((data) => renderPost(postList, data))
-    .catch((err) => {
-      throw new Error("Error al hacer el post");
-    });
-
-  addPostForm.addEventListener("submit", (event) => {
-    event.preventDefault();
-    // Realizamos el post del formulario
-    // Metodo: POST
-    fetch(URL, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        id: null,
-        title: titlePost.value,
-        post: contentPost.value,
-      }),
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        const postArray = [];
-        postArray.push(data);
-        renderPost(postList, postArray);
-      })
-      .catch((err) => {
-        throw new Error("Error al hacer el post");
-      });
-
-    titlePost.value = "";
-    contentPost.value = "";
+  // Traerme todos los post de mi api.
+  getPostApi(URL, (data) => {
+    renderPost(postList, data);
   });
 }
+
+addPostForm.addEventListener("submit", (e) => {
+  // esoty escuchando el evento submit del formulario.
+  e.preventDefault();
+  // const target = e.target;
+
+  const button = addPostForm.querySelector(".btn");
+  // compruebo que los campos tenga campos
+  if (!(titlePost.value && contentPost.value)) {
+    alert("Los campos deben de estar con informacion");
+    return;
+  }
+
+  if(button.classList.contains("btn-secondary")){
+    // esstoy editando
+    const idEdit = button.dataset.id;
+    //Accedo a la Api y actualizo el campo de dicho id
+    
+
+    //modifico el dom
+    
+    return;
+  }
+
+  const postData = {
+    id: null,
+    title: titlePost.value,
+    post: contentPost.value,
+  };
+
+  createPostApi(URL, postData,(data) => {
+    renderPost(postList,[data]);
+  });
+
+  e.target.reset();
+});
 
 postList.addEventListener("click", (e) => {
   e.preventDefault();
@@ -59,67 +65,35 @@ postList.addEventListener("click", (e) => {
   let editBtnPress = e.target.id == "edit-post";
   let deleteBtnPress = e.target.id == "delete-post";
   const postId = e.target.parentElement.dataset.id;
+  const card = e.target.closest(".card");
 
-  const idURL = `http://localhost:4000/posts/${postId}`;
+  // Eliminar card
+  if (deleteBtnPress) {
+    deletePostApi(URL, postId, () => {
+      // ahora busco en el dom el elemento con ID --> postId y lo remove()
+      card.remove();
+    });
+    return;
+  }
 
   // Editar card
   if (editBtnPress) {
-    e.preventDefault();
+    const button = addPostForm.querySelector(".btn");
+    button.classList.add("btn-secondary");
 
-    fetch(idURL, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        titlePost.value = data.title;
-        contentPost.value = data.post;
-      });
-
-      addPostForm.getAttribute("submit", "Editar Card");
-
+    button.textContent = "Editar Post";
     
+    button.dataset.id = postId;
+    
+    const titleCardEdit = card.querySelector(".card-title");
+    const textCardEdit = card.querySelector(".card-text");
 
-    fetch(idURL, {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        title: titlePost.value,
-        post: contentPost.value,
-      }),
-    })
-      .then((response) => response.json())
-      .then((data) => {})
-      .catch((err) => {
-        throw new Error("Error al editar el post");
-      });
+    titlePost.value = titleCardEdit.textContent.trim();
+    contentPost.value = textCardEdit.textContent.trim();
+
   }
 
   // Eliminar Card
-
-  if (deleteBtnPress) {
-    e.preventDefault();
-    fetch(idURL, {
-      method: "DELETE",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        const postCard = e.target.closest(".card");
-        if (postCard) {
-          postCard.remove();
-        }
-      })
-      .catch((err) => {
-        throw new Error("Error al eliminar el post");
-      });
-  }
 });
 
 //---------------- Inicializar ---------------
