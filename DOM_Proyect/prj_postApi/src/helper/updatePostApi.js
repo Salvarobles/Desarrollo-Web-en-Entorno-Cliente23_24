@@ -1,17 +1,21 @@
-
-function updatePostApi(url, postId, callback){
-    fetch(`${url}/${postId}`, {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      })
-        .then((response) => response.json())
-        .then((data) => {
-          titlePost.value = data.title;
-          contentPost.value = data.post;
-        });
-    
-      addPostForm.getAttribute("submit", "Editar Card");
-    
+export function updatePostApi(url, updateData, callback) {
+  fetch(` ${url}/${updateData.id} `, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(updateData),
+  })
+    .then((reponse) => {
+      if (!reponse.ok) {
+        throw new Error("Error actualizar", reponse.statusText);
+      }
+      return updateData;
+    })
+    .then((data) => {
+      callback(data);
+    })
+    .catch((err) => {
+      console.log("Error updated", err);
+    });
 }

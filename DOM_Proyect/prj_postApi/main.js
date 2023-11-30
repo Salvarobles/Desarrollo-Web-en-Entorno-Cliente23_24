@@ -4,6 +4,7 @@ import { renderPost } from "./src/components/renderPost/renderPost";
 import { createPostApi } from "./src/helper/createPostApi";
 import { deletePostApi } from "./src/helper/deletePostApi";
 import { getPostApi } from "./src/helper/getPostApi";
+import { updatePostApi } from "./src/helper/updatePostApi";
 const URL = `${import.meta.env.VITE_URL}/posts`;
 
 //------------- Varibles Grobales --------------------
@@ -36,16 +37,40 @@ addPostForm.addEventListener("submit", (e) => {
   }
 
   if(button.classList.contains("btn-secondary")){
-    // esstoy editando
+    // estoy editando
     const idEdit = button.dataset.id;
-    //Accedo a la Api y actualizo el campo de dicho id
-    
+    const escape = addPostForm.querySelector(".escape");
 
-    //modifico el dom
+    escape.addEventListener("click", (e) => {
+      e.preventDefault();
+      return false;
+    })
+
+    //Accedo a la Api y actualizo el campo de dicho id
+    const updateData = {
+      id: idEdit,
+      title: titlePost.value,
+      post: contentPost.value,
+    };
+    updatePostApi(URL, updateData, (post) => {
+      //modifico el dom
+      const cardDataId = postList.querySelector(`[data-id="${post.id}"]`)
+      const cardTitle = cardDataId.querySelector(".card-title");
+      cardTitle.textContent = post.title;
+      const cardText = cardDataId.querySelector(".card-text");
+      cardText.textContent = post.post;
+      button.classList.remove("btn-secondary")
+      button.textContent = "Añadir post"
+      button.dataset.id = "";
+      cardDataId.parentElement.classList.remove("selected")
+      escape.style.display = "none";
+      addPostForm.reset();  
+    })
     
-    return;
+    return ;
   }
 
+  // ---------------------- añadiendo -----------------
   const postData = {
     id: null,
     title: titlePost.value,
@@ -79,9 +104,13 @@ postList.addEventListener("click", (e) => {
   // Editar card
   if (editBtnPress) {
     const button = addPostForm.querySelector(".btn");
+    const escape = addPostForm.querySelector(".escape");
+    
     button.classList.add("btn-secondary");
-
     button.textContent = "Editar Post";
+    card.classList.add("selected");
+    escape.style.display = "block";
+
     
     button.dataset.id = postId;
     
@@ -92,8 +121,6 @@ postList.addEventListener("click", (e) => {
     contentPost.value = textCardEdit.textContent.trim();
 
   }
-
-  // Eliminar Card
 });
 
 //---------------- Inicializar ---------------

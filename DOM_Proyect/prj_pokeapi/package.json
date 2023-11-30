@@ -1,0 +1,19 @@
+{
+  "name": "prj_pokeapi",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "pokeapi": "json-server --watch server/db.json --port 4000",
+    "fetch-and-save": "node src/helper/fecthAndSave.js",
+    "api": "npm run fecth-and-save && nohup npm run pokeapi && vite"
+  },
+  "devDependencies": {
+    "json-server": "^0.17.4",
+    "node-fetch": "^3.3.2",
+    "vite": "^4.3.2"
+  }
+}
