@@ -9,7 +9,8 @@
     "preview": "vite preview",
     "pokeapi": "json-server --watch server/db.json --port 4000",
     "fetch-and-save": "node src/helper/fecthAndSave.js",
-    "api": "npm run fecth-and-save && nohup npm run pokeapi && vite"
+    "get-pokemons": "node src/helper/getPokemon.js",
+    "api": "npm run fecth-and-save && nohup npm run pokeapi"
   },
   "devDependencies": {
     "json-server": "^0.17.4",
