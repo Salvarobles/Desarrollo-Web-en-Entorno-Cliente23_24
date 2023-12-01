@@ -16,7 +16,7 @@ async function fecthAndSave() {
     const data = await response.json();
     const { a, b, c, results } = data;
     //ahora guardo esa informacion a la DB de mi api.
-    await fs.writeFile(filePatch, JSON.stringify(results, null, 2));
+    await fs.writeFile(filePatch, JSON.stringify({results}, null, 2));
   } catch (err) {
     console.log("Error al acceder a la poke api", err);
   }
