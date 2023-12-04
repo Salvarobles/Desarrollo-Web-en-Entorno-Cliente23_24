@@ -14,5 +14,4 @@ export function createPostApi(url, postData, callback) {
         })
         .then(data => callback(data))
         .catch(err => console.log("error al añadir el post", err));
-
 }
