@@ -1,0 +1,7 @@
+.orderFoods {
+    width: 25%;
+    color: white;
+    display: flex;
+    gap: 15px;
+    align-items: center;
+}

@@ -12,7 +12,7 @@ export function searchPokemon(component, callback) {
   pokemonCards.forEach((card) => {
     const cardTitle = card
       .querySelector(".card-title")
-      .textContent.toLowerCase();
+        .textContent.toLowerCase();
 
     // Comparar con el nombre del Pokémon buscado
     if (cardTitle.includes(pokemonName)) {
